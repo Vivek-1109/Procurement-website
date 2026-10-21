@@ -1,0 +1,93 @@
+const API_BASE = (
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.API_BASE_URL ||
+  (import.meta.env.PROD && typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3001')
+).replace(/\/$/, '');
+
+let accessToken: string | null = null;
+let tokenExpiry: number | null = null;
+
+export function setToken(token: string, expiresIn: number) {
+  accessToken = token;
+  tokenExpiry = Date.now() + expiresIn * 1000 - 30000; // 30s buffer
+}
+
+export function clearToken() {
+  accessToken = null;
+  tokenExpiry = null;
+}
+
+let refreshPromise: Promise<string | null> | null = null;
+
+async function refreshAccessToken(): Promise<string | null> {
+  if (refreshPromise) {
+    return refreshPromise;
+  }
+
+  refreshPromise = (async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/refresh`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (!res.ok) {
+        clearToken();
+        if (res.status === 401 && typeof window !== 'undefined') {
+          window.dispatchEvent(new Event('auth:unauthorized'));
+        }
+        return null;
+      }
+      const data = await res.json();
+      setToken(data.token, data.expiresIn);
+      return data.token;
+    } catch {
+      clearToken();
+      return null;
+    } finally {
+      refreshPromise = null;
+    }
+  })();
+
+  return refreshPromise;
+}
+
+export async function getValidToken(): Promise<string | null> {
+  // If we don't have a token, or it's expired, try to refresh it
+  if (!accessToken || (tokenExpiry && Date.now() > tokenExpiry)) {
+    return await refreshAccessToken();
+  }
+  return accessToken;
+}
+
+export async function apiRequest<T>(
+  path: string,
+  options: RequestInit & { skipAuth?: boolean } = {}
+): Promise<T> {
+  const { skipAuth, ...fetchOptions } = options;
+  const token = skipAuth ? null : await getValidToken();
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...fetchOptions.headers,
+  };
+
+  const res = await fetch(`${API_BASE}${path}`, {
+    ...fetchOptions,
+    headers,
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    if (res.status === 401 && !skipAuth && typeof window !== 'undefined') {
+      clearToken();
+      window.dispatchEvent(new Event('auth:unauthorized'));
+    }
+    const error = await res.json().catch(() => ({ message: 'Request failed' }));
+    throw new Error(error.message || `HTTP ${res.status}`);
+  }
+
+  if (res.status === 204) return undefined as T;
+  return res.json();
+}
+
+export { API_BASE };

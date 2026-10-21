@@ -1,0 +1,193 @@
+import { Router, Request, Response, NextFunction } from 'express';
+import { z } from 'zod';
+import {
+  findActiveClients,
+  findAllClients,
+  findClientById,
+  createClient,
+  updateClient,
+  deleteClient,
+} from '../models/Client';
+import { requireAuth, requireRole } from '../middleware/auth';
+import { validate } from '../middleware/validate';
+import { uploadSingle, uploadBufferToCloudinary } from '../middleware/upload';
+import cloudinary from '../config/cloudinary';
+import { isValidUUID } from '../utils/uuid';
+
+const router = Router();
+
+const clientSchema = z.object({
+  name: z.string().min(1, 'Name is required').max(100, 'Name too long').trim(),
+  logoUrl: z.string().url('Invalid image URL').optional().or(z.literal('')),
+  order: z.number().int().min(0).optional(),
+  isActive: z.boolean().optional(),
+});
+
+const updateClientSchema = clientSchema.partial();
+
+// GET /api/clients — Public
+router.get(
+  '/',
+  async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const clients = await findActiveClients();
+      res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+      res.json(clients);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// GET /api/clients/all — Admin only
+router.get(
+  '/all',
+  requireAuth,
+  requireRole(['admin', 'super_admin']),
+  async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const clients = await findAllClients();
+      res.json(clients);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// POST /api/clients — Admin only
+router.post(
+  '/',
+  requireAuth,
+  requireRole(['admin', 'super_admin']),
+  validate(clientSchema),
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const client = await createClient(req.body);
+      res.status(201).json(client);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// PUT /api/clients/:id — Admin only
+router.put(
+  '/:id',
+  requireAuth,
+  requireRole(['admin', 'super_admin']),
+  validate(updateClientSchema),
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { id } = req.params;
+
+      if (!isValidUUID(id)) {
+        res.status(400).json({ error: 'Invalid client ID' });
+        return;
+      }
+
+      const client = await updateClient(id, {
+        name: req.body.name,
+        logoUrl: req.body.logoUrl,
+        order: req.body.order,
+        isActive: req.body.isActive,
+      });
+
+      if (!client) {
+        res.status(404).json({ error: 'Client not found' });
+        return;
+      }
+
+      res.json(client);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// DELETE /api/clients/:id — Admin only
+router.delete(
+  '/:id',
+  requireAuth,
+  requireRole(['admin', 'super_admin']),
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { id } = req.params;
+
+      if (!isValidUUID(id)) {
+        res.status(400).json({ error: 'Invalid client ID' });
+        return;
+      }
+
+      const client = await findClientById(id);
+
+      if (!client) {
+        res.status(404).json({ error: 'Client not found' });
+        return;
+      }
+
+      if (client.cloudinaryPublicId) {
+        try {
+          await cloudinary.uploader.destroy(client.cloudinaryPublicId);
+        } catch (cloudinaryErr) {
+          console.error('Cloudinary deletion failed:', cloudinaryErr);
+        }
+      }
+
+      await deleteClient(id);
+      res.status(204).send();
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// POST /api/clients/:id/logo — Admin only
+router.post(
+  '/:id/logo',
+  requireAuth,
+  requireRole(['admin', 'super_admin']),
+  (req: Request, res: Response, next: NextFunction): void => {
+    uploadSingle(req, res, (err: any) => {
+      if (err) next(err);
+      else next();
+    });
+  },
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { id } = req.params;
+
+      if (!isValidUUID(id)) {
+        res.status(400).json({ error: 'Invalid client ID' });
+        return;
+      }
+
+      if (!req.file) {
+        res.status(400).json({ error: 'No image file provided' });
+        return;
+      }
+
+      const cloudinaryResult = await uploadBufferToCloudinary(req.file.buffer, 'prosource/clients');
+
+      const existing = await findClientById(id);
+      if (existing?.cloudinaryPublicId) {
+        await cloudinary.uploader.destroy(existing.cloudinaryPublicId).catch(console.error);
+      }
+
+      const client = await updateClient(id, {
+        logoUrl: cloudinaryResult.secure_url,
+        cloudinaryPublicId: cloudinaryResult.public_id,
+      });
+
+      if (!client) {
+        res.status(404).json({ error: 'Client not found' });
+        return;
+      }
+
+      res.json(client);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+export default router;
