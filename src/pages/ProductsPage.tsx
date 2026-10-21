@@ -131,16 +131,16 @@ const ProductsPage: React.FC = () => {
   }, [categories_list, activeCategory]);
 
   const seoTitle = activeCategory === 'All'
-    ? 'B2B Procurement Catalogue | APR Services Enterprise'
-    : `Buy Bulk ${activeCategory} | B2B Procurement | APR Services Enterprise`;
+    ? 'Aviation & Aerospace Consumables Catalogue | Divyanshi Aviation'
+    : `Buy Bulk ${activeCategory} | Aerospace Consumables | Divyanshi Aviation`;
 
   const seoDesc = activeCategory === 'All'
-    ? 'Browse our full industrial inventory of aviation consumables. Find certified adhesives, coatings, lubricants, tapes, greases, and sealants.'
-    : `Premium supply of ${activeCategory}. ${categoryDesc ? `${categoryDesc.slice(0, 140)}... ` : ''}Request a fast wholesale quote today.`;
+    ? 'Browse our certified inventory of aviation & aerospace consumables. Authorized distributor of adhesives, coatings, lubricants, tapes, greases, and sealants.'
+    : `Certified aerospace supply of ${activeCategory}. ${categoryDesc ? `${categoryDesc.slice(0, 140)}... ` : ''}Request a fast wholesale quote today.`;
 
   const canonicalUrl = activeCategory === 'All'
-    ? 'https://aprsvs.com/products'
-    : `https://aprsvs.com/products?category=${encodeURIComponent(activeCategory)}`;
+    ? 'https://divyanshiaviation.com/products'
+    : `https://divyanshiaviation.com/products?category=${encodeURIComponent(activeCategory)}`;
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -150,13 +150,13 @@ const ProductsPage: React.FC = () => {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://aprsvs.com/'
+        'item': 'https://divyanshiaviation.com/'
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'Products',
-        'item': 'https://aprsvs.com/products'
+        'item': 'https://divyanshiaviation.com/products'
       },
       ...(activeCategory !== 'All' ? [{
         '@type': 'ListItem',
@@ -224,7 +224,7 @@ const ProductsPage: React.FC = () => {
           </Link>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <p className="text-[#93C5FD] text-xs font-semibold uppercase tracking-[0.15em] mb-2">APR Services Enterprise</p>
+              <p className="text-[#93C5FD] text-xs font-semibold uppercase tracking-[0.15em] mb-2">Divyanshi Aviation Services</p>
               <h1 className="text-3xl sm:text-4xl font-bold text-white font-serif mb-2">
                 Product Catalogue
               </h1>

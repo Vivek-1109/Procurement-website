@@ -39,20 +39,20 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16 md:h-18">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-lg overflow-hidden flex items-center justify-center bg-white border border-[#E5E7EB] shadow-2xs group-hover:border-[#1557B0]/40 group-hover:scale-105 transition-all duration-300">
+            <div className="h-11 px-2 py-1 rounded-lg overflow-hidden flex items-center justify-center bg-white border border-[#E5E7EB] shadow-2xs group-hover:border-[#1557B0]/40 group-hover:scale-105 transition-all duration-300">
               <img
-                src="/apr-logo.jpg"
-                alt="APR Services Logo"
-                className="w-full h-full object-contain p-0.5"
+                src="/logo.png"
+                alt="Divyanshi Aviation Services Logo"
+                className="h-full w-auto object-contain"
                 loading="eager"
               />
             </div>
             <div className="flex flex-col">
               <span className="font-extrabold text-base sm:text-lg tracking-tight text-[#1F2937] leading-none group-hover:text-[#1557B0] transition-colors">
-                APR Services
+                Divyanshi Aviation
               </span>
               <span className="text-[9px] tracking-[0.22em] uppercase font-bold text-[#1557B0] mt-0.5">
-                Enterprise Sourcing
+                Services Pvt Ltd
               </span>
             </div>
           </Link>

@@ -73,15 +73,15 @@ export const INITIAL_CLIENTS: Client[] = [
 export const INITIAL_CERTIFICATIONS: Certification[] = [
   {
     id: 'cert-1',
-    title: 'ISO 9001:2015 Quality Management System',
-    issuer: 'Bureau Veritas Certification',
-    year: '2023 - 2026',
+    title: 'AS9120B Certified Aviation Distributor',
+    issuer: 'Aviation, Space and Defense Quality Management',
+    year: 'Active Certified',
     imageUrl: '',
   },
   {
     id: 'cert-2',
-    title: 'ISO 14001:2015 Environmental Management',
-    issuer: 'DNV GL Business Assurance',
+    title: 'ISO 9001:2015 Quality Management System',
+    issuer: 'Bureau Veritas Certification',
     year: '2023 - 2026',
     imageUrl: '',
   },
@@ -96,7 +96,7 @@ export const INITIAL_CERTIFICATIONS: Certification[] = [
     id: 'cert-4',
     title: 'MSME & Udyam Registered Enterprise',
     issuer: 'Government of India',
-    year: 'UDYAM-DL-08-001245',
+    year: 'Active Enterprise',
     imageUrl: '',
   },
 ];

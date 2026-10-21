@@ -55,10 +55,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title, subtitle }) 
         <div className="p-5 border-b border-[#E5E7EB]">
           <Link to="/" className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-[#1557B0] rounded-sm flex items-center justify-center">
-              <span className="text-white font-bold text-xs">PS</span>
+              <span className="text-white font-bold text-xs">DA</span>
             </div>
             <div>
-              <div className="font-bold text-[#1F2937] text-sm">APR Services</div>
+              <div className="font-bold text-[#1F2937] text-sm">Divyanshi Aviation</div>
               <div className="text-[0.6rem] text-[#1557B0] uppercase tracking-wider font-semibold">Admin Panel</div>
             </div>
           </Link>

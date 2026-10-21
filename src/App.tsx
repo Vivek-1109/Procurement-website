@@ -42,35 +42,35 @@ function HomePage() {
     {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      'name': 'APR Services Enterprise',
-      'url': 'https://aprsvs.com',
-      'logo': 'https://aprsvs.com/favicon.svg',
+      'name': 'Divyanshi Aviation Services Pvt Ltd',
+      'url': 'https://divyanshiaviation.com',
+      'logo': 'https://divyanshiaviation.com/assets/img/logo.png',
       'contactPoint': {
         '@type': 'ContactPoint',
-        'telephone': '+91-99113-94456',
+        'telephone': '+91-9910997428',
         'contactType': 'sales',
-        'email': 'Aprservices20@gmail.com',
-        'areaServed': 'IN',
+        'email': 'sales.consumables@divyanshiaviation.com',
+        'areaServed': ['IN', 'BD', 'LK', 'NP', 'BT', 'MY'],
         'availableLanguage': 'en'
       },
       'address': {
         '@type': 'PostalAddress',
-        'streetAddress': 'RZ-B3 243/D, Vijay Enclave, South West Delhi',
+        'streetAddress': 'Plot No. 22 & 23, Pillar No. 68, Near Nangli Metro Station, Ranaji Enclave, Najafgarh',
         'addressLocality': 'New Delhi',
-        'postalCode': '110045',
+        'postalCode': '110043',
         'addressCountry': 'IN'
       }
     },
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      'name': 'APR Services Enterprise',
-      'url': 'https://aprsvs.com',
+      'name': 'Divyanshi Aviation Services Pvt Ltd',
+      'url': 'https://divyanshiaviation.com',
       'potentialAction': {
         '@type': 'SearchAction',
         'target': {
           '@type': 'EntryPoint',
-          'urlTemplate': 'https://aprsvs.com/products?search={search_term_string}'
+          'urlTemplate': 'https://divyanshiaviation.com/products?search={search_term_string}'
         },
         'query-input': 'required name=search_term_string'
       }
@@ -78,9 +78,9 @@ function HomePage() {
   ];
 
   useSEO({
-    title: 'APR Services Enterprise | Aviation & Industrial Consumables Sourcing',
-    description: 'APR Services Enterprise is a premier B2B distributor of aviation & industrial consumables. We supply high-performance adhesives, sealants, lubricants, oils, and coatings in bulk with complete quality certification.',
-    canonicalUrl: 'https://aprsvs.com/',
+    title: 'Divyanshi Aviation Services Pvt Ltd | Aviation & Aerospace Consumables',
+    description: 'Divyanshi Aviation Services Pvt Ltd is India’s premier AS9120B certified distributor and stockist of aviation consumables, aircraft sealants, adhesives, lubricants, and temperature-controlled shipments.',
+    canonicalUrl: 'https://divyanshiaviation.com/',
     schemaMarkup: homeSchema
   });
 

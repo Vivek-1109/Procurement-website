@@ -26,7 +26,7 @@ const ProductDetailPage: React.FC = () => {
       'category': product.category,
       'brand': {
         '@type': 'Brand',
-        'name': 'APR Services Enterprise',
+        'name': 'Divyanshi Aviation Services',
       },
       'offers': {
         '@type': 'AggregateOffer',
@@ -44,40 +44,40 @@ const ProductDetailPage: React.FC = () => {
           '@type': 'ListItem',
           'position': 1,
           'name': 'Home',
-          'item': 'https://aprsvs.com/'
+          'item': 'https://divyanshiaviation.com/'
         },
         {
           '@type': 'ListItem',
           'position': 2,
           'name': 'Products',
-          'item': 'https://aprsvs.com/products'
+          'item': 'https://divyanshiaviation.com/products'
         },
         {
           '@type': 'ListItem',
           'position': 3,
           'name': product.category,
-          'item': `https://aprsvs.com/products?category=${encodeURIComponent(product.category)}`
+          'item': `https://divyanshiaviation.com/products?category=${encodeURIComponent(product.category)}`
         },
         {
           '@type': 'ListItem',
           'position': 4,
           'name': product.name,
-          'item': `https://aprsvs.com/products/${product.id}`
+          'item': `https://divyanshiaviation.com/products/${product.id}`
         }
       ]
     };
 
     return {
-      title: `${product.name} | B2B Procurement | APR Services Enterprise`,
+      title: `${product.name} | Aviation Consumables | Divyanshi Aviation`,
       description: `Source ${product.name} in bulk. ${product.description.slice(0, 150)}... Request a fast wholesale proposal today.`,
-      canonicalUrl: `https://aprsvs.com/products/${product.id}`,
+      canonicalUrl: `https://divyanshiaviation.com/products/${product.id}`,
       schemaMarkup: [pSchema, bSchema]
     };
   }, [product]);
 
   useSEO({
-    title: seoData?.title || 'Product Detail | APR Services Enterprise',
-    description: seoData?.description || 'Browse high-quality aviation and industrial consumables.',
+    title: seoData?.title || 'Product Detail | Divyanshi Aviation',
+    description: seoData?.description || 'Browse certified aviation and aerospace consumables.',
     canonicalUrl: seoData?.canonicalUrl,
     schemaMarkup: seoData?.schemaMarkup || undefined
   });

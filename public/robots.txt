@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/*
 
-Sitemap: https://aprsvs.com/sitemap.xml
+Sitemap: https://divyanshiaviation.com/sitemap.xml

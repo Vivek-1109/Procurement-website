@@ -10,8 +10,8 @@ const seed = async (): Promise<void> => {
   const pool = getPool();
 
   // ── Admin Setup ─────────────────────────────────────────────
-  const adminEmail = (process.env.INITIAL_ADMIN_EMAIL || 'admin@aprsvs.com').toLowerCase().trim();
-  const adminPassword = process.env.INITIAL_ADMIN_PASSWORD || 'aprsvs123';
+  const adminEmail = (process.env.INITIAL_ADMIN_EMAIL || 'admin@divyanshiaviation.com').toLowerCase().trim();
+  const adminPassword = process.env.INITIAL_ADMIN_PASSWORD || 'divyanshi123';
 
   const { rows: existingAdmins } = await pool.query(
     'SELECT id FROM admins WHERE email = $1 LIMIT 1',

@@ -58,10 +58,10 @@ const CompactWhyUs: React.FC = () => {
             className="text-3xl sm:text-4xl font-bold text-[#1F2937] mb-3 font-serif"
             style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
           >
-            Why Partner With APR Services
+            Why Partner With Divyanshi Aviation
           </h2>
           <p className="text-[#4B5563] text-sm sm:text-base leading-relaxed">
-            Reliable end-to-end supply solutions tailored for aerospace manufacturers, commercial airlines, and defense MRO facilities.
+            Reliable aerospace consumables and cold-chain supply solutions tailored for commercial airlines, defence operators, MRO facilities, and flying clubs.
           </p>
         </div>
 

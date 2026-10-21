@@ -12,24 +12,24 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-lg overflow-hidden bg-white flex items-center justify-center p-0.5 shadow-xs">
+              <div className="h-11 px-2 py-1 rounded-lg overflow-hidden bg-white flex items-center justify-center shadow-xs">
                 <img
-                  src="/apr-logo.jpg"
-                  alt="APR Services Logo"
-                  className="w-full h-full object-contain"
+                  src="/logo.png"
+                  alt="Divyanshi Aviation Services Logo"
+                  className="h-full w-auto object-contain"
                 />
               </div>
               <div>
-                <div className="font-bold text-white text-base">APR Services</div>
-                <div className="text-[0.65rem] text-[#93C5FD] tracking-widest uppercase font-medium">Enterprise Sourcing</div>
+                <div className="font-bold text-white text-base">Divyanshi Aviation</div>
+                <div className="text-[0.65rem] text-[#93C5FD] tracking-widest uppercase font-medium">Services Pvt. Ltd.</div>
               </div>
             </div>
             <p className="text-sm text-slate-300 leading-relaxed mb-5">
-              Trusted B2B procurement partner for large enterprises and MNCs. We source, manage, and deliver industrial and aviation consumables at scale.
+              India's premier AS9120B certified distributor of aviation & aerospace consumables, sealants, lubricants, adhesives, and temperature-controlled cold-chain shipments.
             </p>
             <div className="flex gap-3">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/divyanshi-aviation-services-private-limited/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-sm bg-white/10 hover:bg-[#1557B0] flex items-center justify-center transition-colors text-white"
@@ -83,35 +83,35 @@ const Footer: React.FC = () => {
               <li className="flex gap-3">
                 <MapPin size={15} className="text-[#3B82F6] flex-shrink-0 mt-0.5" />
                 <span className="text-sm text-slate-300 leading-relaxed">
-                  RZ-B3 243/D, Vijay Enclave, South West Delhi, <br /> 
-                  New Delhi-110045
+                  <strong>Head Office:</strong> Plot No. 22 & 23, Pillar No. 68, Near Nangli Metro Station, Ranaji Enclave, Najafgarh, New Delhi 110043
                 </span>
               </li>
               <li>
                 <a
-                  href="tel:+919911394456"
+                  href="tel:+919910997428"
                   className="flex items-center gap-3 text-sm text-slate-300 hover:text-[#93C5FD] transition-colors"
                 >
                   <Phone size={15} className="text-[#3B82F6] flex-shrink-0" />
-                  +91 99113 94456
+                  +91 9910997428 / +91 9971998747
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:Aprservices20@gmail.com"
+                  href="mailto:sales.consumables@divyanshiaviation.com"
                   className="flex items-center gap-3 text-sm text-slate-300 hover:text-[#93C5FD] transition-colors"
                 >
                   <Mail size={15} className="text-[#3B82F6] flex-shrink-0" />
-                  Aprservices20@gmail.com
+                  sales.consumables@divyanshiaviation.com
                 </a>
               </li>
             </ul>
 
-            {/* Certifications Mini */}
+            {/* Hubs & Certifications Mini */}
             <div className="mt-6 pt-6 border-t border-white/10">
-              <p className="text-xs text-slate-400 uppercase tracking-wider mb-3">Registered & Certified</p>
+              <p className="text-xs text-slate-400 uppercase tracking-wider mb-2">Offices & Warehouses</p>
+              <p className="text-xs text-slate-300 mb-3">New Delhi | Hyderabad | Bengaluru</p>
               <div className="flex flex-wrap gap-2">
-                {['GST', 'MSME', 'ISO 9001', 'Udyam'].map(cert => (
+                {['AS9120B', 'ISO 9001', 'MSME', 'GST'].map(cert => (
                   <span
                     key={cert}
                     className="text-xs px-2 py-1 rounded-sm border border-white/15 text-slate-300 bg-white/5"
@@ -129,7 +129,7 @@ const Footer: React.FC = () => {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-slate-400">
-            © {new Date().getFullYear()} APR Services Enterprise Pvt. Ltd. All rights reserved.
+            © {new Date().getFullYear()} Divyanshi Aviation Services Pvt. Ltd. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <span className="text-xs text-slate-400">Privacy Policy</span>

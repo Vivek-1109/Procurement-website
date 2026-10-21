@@ -30,7 +30,7 @@ app.set("trust proxy", 1);
 // Parse allowed origins — automatically switches based on NODE_ENV
 const isProd = process.env.NODE_ENV === "production";
 const defaultOrigin = isProd
-  ? "https://aprsvs.com,https://apr-services.vercel.app"
+  ? "https://divyanshiaviation.com,https://www.divyanshiaviation.com"
   : "http://localhost:5173";
 const rawOrigin = process.env.ALLOWED_ORIGIN || defaultOrigin;
 const allowedOrigins = rawOrigin.split(",").map((o) => o.trim()).filter(Boolean);
@@ -48,6 +48,7 @@ app.use(
           "data:",
           "https://res.cloudinary.com",
           "https://images.unsplash.com",
+          "https://divyanshiaviation.com",
         ],
         connectSrc: [
           "'self'",
@@ -56,7 +57,8 @@ app.use(
           "https://*.railway.app",
           "https://*.up.railway.app",
           "https://*.vivek-jha.me",
-          "https://aprsvs.com",
+          "https://divyanshiaviation.com",
+          "https://www.divyanshiaviation.com",
           ...allowedOrigins,
         ],
         frameSrc: ["'none'"],
@@ -85,8 +87,9 @@ app.use(
         /\.vercel\.app$/i.test(origin) ||
         /\.onrender\.com$/i.test(origin) ||
         /\.(up\.railway\.app|railway\.app)$/i.test(origin) ||
-        /\.(vivek-jha\.me|aprsvs\.com)$/i.test(origin) ||
-        origin === "https://aprsvs.com" ||
+        /\.(vivek-jha\.me|divyanshiaviation\.com)$/i.test(origin) ||
+        origin === "https://divyanshiaviation.com" ||
+        origin === "https://www.divyanshiaviation.com" ||
         allowedOrigins.includes(origin);
 
       if (isAllowed) {
@@ -249,7 +252,7 @@ const startServer = async (): Promise<void> => {
 
     app.listen(PORT, "0.0.0.0", () => {
       console.log(
-        `🚀 APR Services running on http://0.0.0.0:${PORT} [${process.env.NODE_ENV || "development"}]`,
+        `🚀 Divyanshi Aviation API running on http://0.0.0.0:${PORT} [${process.env.NODE_ENV || "development"}]`,
       );
     });
   } catch (err) {

@@ -1,6 +1,6 @@
 export const SCHEMA_SQL = `
 -- ============================================================
--- APR Services Enterprise — PostgreSQL Schema
+-- Divyanshi Aviation Services Pvt Ltd — PostgreSQL Schema
 -- Target: Neon PostgreSQL
 -- ============================================================
 

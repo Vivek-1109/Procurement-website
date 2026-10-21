@@ -37,11 +37,11 @@ const AdminLogin: React.FC = () => {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="w-10 h-10 bg-[#1557B0] rounded-sm flex items-center justify-center">
-              <span className="text-white font-bold text-sm">PS</span>
+              <span className="text-white font-bold text-sm">DA</span>
             </div>
             <div className="text-left">
-              <div className="font-bold text-[#1F2937] text-lg">APR Services</div>
-              <div className="text-xs text-[#1557B0] tracking-widest uppercase font-semibold">Enterprise</div>
+              <div className="font-bold text-[#1F2937] text-lg">Divyanshi Aviation</div>
+              <div className="text-xs text-[#1557B0] tracking-widest uppercase font-semibold">Portal</div>
             </div>
           </div>
           <h1 className="text-2xl font-bold text-[#1F2937]" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -64,7 +64,7 @@ const AdminLogin: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  placeholder="admin@aprsvs.com"
+                  placeholder="admin@divyanshiaviation.com"
                   required
                   className="w-full pl-9 pr-4 py-2.5 text-sm border border-[#E5E7EB] rounded-sm text-[#1F2937] focus:border-[#1557B0] focus:ring-2 focus:ring-[#1557B0]/20 outline-none transition-all"
                 />

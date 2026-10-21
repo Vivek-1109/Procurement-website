@@ -25,20 +25,20 @@ const schema = z.object({
 const contactInfo = [
   {
     icon: MapPin,
-    label: 'Office Address',
-    value: 'RZ-B3 243/D, Vijay Enclave, South West Delhi, New Delhi-110045',
+    label: 'Head Office (New Delhi)',
+    value: 'Plot No. 22 & 23, Pillar No. 68, Near Nangli Metro Station, Ranaji Enclave, Najafgarh, New Delhi 110043',
   },
   {
     icon: Phone,
-    label: 'Phone',
-    value: '+91 99113 94456',
-    href: 'tel:+919911394456',
+    label: 'Phone Numbers',
+    value: '+91 9910997428 / +91 9971998747',
+    href: 'tel:+919910997428',
   },
   {
     icon: Mail,
-    label: 'Email',
-    value: 'Aprservices20@gmail.com',
-    href: 'mailto:Aprservices20@gmail.com',
+    label: 'Email Enquiries',
+    value: 'sales.consumables@divyanshiaviation.com',
+    href: 'mailto:sales.consumables@divyanshiaviation.com',
   },
 ];
 
@@ -99,16 +99,16 @@ const ContactPage: React.FC = () => {
   const contactSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    'name': 'APR Services Enterprise',
-    'image': 'https://aprsvs.com/favicon.svg',
-    'telephone': '+91 99113 94456',
-    'email': 'Aprservices20@gmail.com',
-    'url': 'https://aprsvs.com/contact',
+    'name': 'Divyanshi Aviation Services Pvt Ltd',
+    'image': 'https://divyanshiaviation.com/assets/img/logo.png',
+    'telephone': '+91 9910997428',
+    'email': 'sales.consumables@divyanshiaviation.com',
+    'url': 'https://divyanshiaviation.com/contact',
     'address': {
       '@type': 'PostalAddress',
-      'streetAddress': 'RZ-B3 243/D, Vijay Enclave, South West Delhi',
+      'streetAddress': 'Plot No. 22 & 23, Pillar No. 68, Near Nangli Metro Station, Ranaji Enclave, Najafgarh',
       'addressLocality': 'New Delhi',
-      'postalCode': '110045',
+      'postalCode': '110043',
       'addressCountry': 'IN'
     },
     'openingHoursSpecification': [
@@ -128,9 +128,9 @@ const ContactPage: React.FC = () => {
   };
 
   useSEO({
-    title: 'Request a Quote | B2B Procurement | APR Services Enterprise',
-    description: 'Get a fast quote for aviation and industrial consumables. APR Services supplies ISO-certified adhesives, sealants, lubricants, oils, coatings, and tapes in bulk.',
-    canonicalUrl: 'https://aprsvs.com/contact',
+    title: 'Request a Quote | Aviation & Aerospace Consumables | Divyanshi Aviation',
+    description: 'Request an expedited wholesale quote for aerospace consumables, aircraft sealants, lubricants, oils, adhesives, and temperature-controlled logistics from Divyanshi Aviation.',
+    canonicalUrl: 'https://divyanshiaviation.com/contact',
     schemaMarkup: contactSchema
   });
 
@@ -203,13 +203,30 @@ const ContactPage: React.FC = () => {
                 </div>
               </div>
 
+              {/* Regional Offices */}
+              <div className="mt-4 p-5 bg-white rounded-sm border border-[#E5E7EB]">
+                <h4 className="font-semibold text-[#1F2937] text-sm mb-3">Regional Branch Offices</h4>
+                <div className="space-y-3 text-xs text-[#4B5563]">
+                  <div>
+                    <strong className="text-[#1F2937] block text-xs">Hyderabad Office:</strong>
+                    <span>Sri Sri Antahpuram, Plot No 201, Street No 6, Patelguda Road, Hyderabad, Telangana 501510</span>
+                    <span className="block text-[#1557B0] mt-0.5">Email: bd@divyanshiaviation.com</span>
+                  </div>
+                  <div className="pt-2 border-t border-[#E5E7EB]">
+                    <strong className="text-[#1F2937] block text-xs">Bengaluru Office:</strong>
+                    <span>Site No 30, Basaveshwara Swamy Nilaya, Shamanna Layout, Bengaluru, Karnataka 562149</span>
+                    <span className="block text-[#1557B0] mt-0.5">Call: +91 89292 44646 | marketing@divyanshiaviation.com</span>
+                  </div>
+                </div>
+              </div>
+
               {/* Response SLA */}
               <div className="mt-4 p-4 bg-[#1557B0]/10 rounded-sm border border-[#1557B0]/20">
                 <div className="flex gap-3 items-start">
                   <CheckCircle2 size={16} className="text-[#1557B0] flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-[#4B5563] leading-relaxed">
                     We commit to responding to all procurement enquiries within{' '}
-                    <strong className="text-[#1557B0]">4 business hours</strong>. For urgent requirements,
+                    <strong className="text-[#1557B0]">4 business hours</strong>. For urgent AOG requirements,
                     call us directly.
                   </p>
                 </div>

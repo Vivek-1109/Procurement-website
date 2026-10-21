@@ -21,13 +21,13 @@ interface EmailConfig {
 
 const resend = new Resend(process.env.RESEND_API_KEY || 'missing_resend_api_key');
 
-const COMPANY_NAME = cleanEnv(process.env.COMPANY_NAME) || 'APR Services Enterprise';
+const COMPANY_NAME = cleanEnv(process.env.COMPANY_NAME) || 'Divyanshi Aviation Services Pvt Ltd';
 const SAFE_COMPANY_NAME = sanitizeDisplayName(COMPANY_NAME);
-const WEBSITE_URL = cleanEnv(process.env.WEBSITE_URL) || 'https://aprsvs.com';
-const COMPANY_PHONE = cleanEnv(process.env.COMPANY_PHONE) || '+91 99113 94456';
+const WEBSITE_URL = cleanEnv(process.env.WEBSITE_URL) || 'https://divyanshiaviation.com';
+const COMPANY_PHONE = cleanEnv(process.env.COMPANY_PHONE) || '+91 9910997428';
 const COMPANY_ADDRESS =
   cleanEnv(process.env.COMPANY_ADDRESS) ||
-  'RZ-B3 243/D, Vijay Enclave, South West Delhi, New Delhi-110045';
+  'Plot No. 22 & 23, Pillar No. 68, Near Nangli Metro Station, Ranaji Enclave, Najafgarh, New Delhi 110043';
 const BRAND_COLOR = sanitizeHexColor(process.env.EMAIL_BRAND_COLOR, '#1557B0');
 const BRAND_DARK = '#0B2A4A';
 const TEXT_DARK = '#1F2937';
@@ -65,7 +65,7 @@ function sanitizeHeader(value: string): string {
 }
 
 function sanitizeDisplayName(value: string): string {
-  return sanitizeHeader(value).replace(/[<>"]/g, '').trim() || 'APR Services Enterprise';
+  return sanitizeHeader(value).replace(/[<>"]/g, '').trim() || 'Divyanshi Aviation Services Pvt Ltd';
 }
 
 function sanitizeHexColor(value: string | undefined, fallback: string): string {
@@ -110,7 +110,7 @@ function getValidLogoUrl(): string | null {
     return envLogo;
   }
   if (WEBSITE_URL && /^https:\/\//i.test(WEBSITE_URL)) {
-    return `${WEBSITE_URL.replace(/\/+$/, '')}/apr-logo.jpg`;
+    return `${WEBSITE_URL.replace(/\/+$/, '')}/logo.png`;
   }
   return null;
 }
@@ -136,7 +136,7 @@ function renderLogo(): string {
     <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto 16px auto;border-collapse:collapse;">
       <tr>
         <td align="center" style="width:48px;height:48px;background:#ffffff;border-radius:10px;font-size:18px;font-weight:900;color:${BRAND_COLOR};letter-spacing:0.5px;text-align:center;vertical-align:middle;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
-          APR
+          DA
         </td>
       </tr>
     </table>
@@ -555,7 +555,7 @@ export const sendContactConfirmation = async (lead: ILead): Promise<EmailSendRes
     ${emailFooter()}
   `;
 
-  const html = emailShell(subject, 'Your procurement inquiry has been received by APR Services Enterprise.', body);
+  const html = emailShell(subject, 'Your procurement inquiry has been received by Divyanshi Aviation Services Pvt Ltd.', body);
   const text = [
     `Thank you, ${lead.name}.`,
     '',

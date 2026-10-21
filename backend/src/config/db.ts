@@ -43,8 +43,8 @@ export async function initSchema(): Promise<void> {
 
 // ── Default Admin Initialisation (Automatic for Cloud Deployments) ──
 export async function initDefaultAdmin(): Promise<void> {
-  const adminEmail = (process.env.INITIAL_ADMIN_EMAIL || 'admin@aprsvs.com').toLowerCase().trim();
-  const adminPassword = process.env.INITIAL_ADMIN_PASSWORD || 'aprsvs123';
+  const adminEmail = (process.env.INITIAL_ADMIN_EMAIL || 'admin@divyanshiaviation.com').toLowerCase().trim();
+  const adminPassword = process.env.INITIAL_ADMIN_PASSWORD || 'divyanshi123';
   const poolRef = getPool();
   try {
     const { rows } = await poolRef.query('SELECT id FROM admins WHERE email = $1 LIMIT 1', [adminEmail]);

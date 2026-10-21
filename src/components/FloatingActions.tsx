@@ -18,7 +18,7 @@ const FloatingActions: React.FC = () => {
     <aside aria-label="Quick Actions" className="fixed bottom-6 right-5 z-40 flex flex-col gap-2.5 items-end select-none">
       {/* WhatsApp Quick Chat */}
       <a
-        href="https://wa.me/919911394456?text=Hello%20APR%20Services,%20I%20would%20like%20to%20enquire%20about%20aviation/industrial%20procurement."
+        href="https://wa.me/919971998747?text=Hello%20Divyanshi%20Aviation,%20I%20would%20like%20to%20enquire%20about%20aviation/aerospace%20consumables."
         target="_blank"
         rel="noopener noreferrer"
         className="group flex items-center bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-full p-2.5 shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:shadow-emerald-600/35 border border-white/20 transition-all duration-300 transform hover:-translate-y-0.5"
