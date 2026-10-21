@@ -81,7 +81,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setLoadingProducts(true);
     try {
       const data = await fetchProducts();
-      if (Array.isArray(data)) {
+      if (Array.isArray(data) && data.length > 0) {
         setProducts(data);
       }
     } catch (err) {
@@ -105,7 +105,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const refreshCategories = useCallback(async () => {
     try {
       const data = await fetchCategories();
-      if (Array.isArray(data)) {
+      if (Array.isArray(data) && data.length > 0) {
         setCategoriesList(data);
       }
     } catch (err) {

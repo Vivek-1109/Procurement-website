@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "Adhesive",
+    "name": "Adhesives",
+    "count": 505
+  },
+  {
+    "slug": "Coating",
+    "name": "Coatings",
+    "count": 101
+  },
+  {
+    "slug": "Film Adhesive",
+    "name": "Film Adhesives",
+    "count": 7
+  },
+  {
+    "slug": "Mechanical Item",
+    "name": "Mechanical Items",
+    "count": 207
+  },
+  {
+    "slug": "Lubricant",
+    "name": "Lubricants",
+    "count": 214
+  },
+  {
+    "slug": "Mechanical Consumable",
+    "name": "Mechanical Consumables",
+    "count": 283
+  },
+  {
+    "slug": "Conductive Adhesive",
+    "name": "Conductive Adhesives",
+    "count": 8
+  },
+  {
+    "slug": "NDT Chemical",
+    "name": "NDT Chemicals",
+    "count": 17
+  },
+  {
+    "slug": "Oil",
+    "name": "Oils",
+    "count": 94
+  },
+  {
+    "slug": "Paint",
+    "name": "Paints",
+    "count": 516
+  },
+  {
+    "slug": "Sealant",
+    "name": "Sealants",
+    "count": 386
+  },
+  {
+    "slug": "Tape",
+    "name": "Tapes",
+    "count": 269
+  },
+  {
+    "slug": "Cleaner",
+    "name": "Cleaners",
+    "count": 260
+  },
+  {
+    "slug": "grease",
+    "name": "Greases",
+    "count": 85
+  }
+]

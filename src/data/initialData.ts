@@ -1,8 +1,115 @@
 import type { Product, Category, Client, Certification } from '../types';
+import rawProducts from './scraped_products.json';
 
-export const INITIAL_CATEGORIES: Category[] = [];
+export const INITIAL_CATEGORIES: Category[] = [
+  {
+    id: 'cat-adhesives',
+    name: 'Adhesives',
+    description: 'High-performance structural, paste, and specialty aerospace bonding adhesives.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Adhesives.jpg',
+    order: 1,
+  },
+  {
+    id: 'cat-coatings',
+    name: 'Coatings',
+    description: 'Protective, anti-corrosive, thermal barrier, and specialty aerospace coatings.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Coating.jpg',
+    order: 2,
+  },
+  {
+    id: 'cat-sealants',
+    name: 'Sealants',
+    description: 'Fuel tank, fuselage, windscreen, and environmental aviation sealants.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Sealants.jpg',
+    order: 3,
+  },
+  {
+    id: 'cat-lubricants',
+    name: 'Lubricants',
+    description: 'Synthetic aircraft lubricants, turbine oils, and high-load boundary lubricants.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Lubricants.jpg',
+    order: 4,
+  },
+  {
+    id: 'cat-paints',
+    name: 'Paints',
+    description: 'Aerospace topcoats, primers, polyurethane coatings, and marking paints.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Paints.jpg',
+    order: 5,
+  },
+  {
+    id: 'cat-tapes',
+    name: 'Tapes',
+    description: 'Aviation cargo, high-temperature masking, leading edge, and foil tapes.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Tapes.jpg',
+    order: 6,
+  },
+  {
+    id: 'cat-cleaners',
+    name: 'Cleaners',
+    description: 'Solvent degreasers, aircraft exterior wash, and precision electronic cleaners.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Cleaners.jpg',
+    order: 7,
+  },
+  {
+    id: 'cat-greases',
+    name: 'Greases',
+    description: 'Airframe greases, wheel bearing greases, and extreme temperature aerospace lubricants.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Grease.jpg',
+    order: 8,
+  },
+  {
+    id: 'cat-oils',
+    name: 'Oils',
+    description: 'Turbine engine oils, hydraulic fluids, and gear lubricants for civil and defense aircraft.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Oils.jpg',
+    order: 9,
+  },
+  {
+    id: 'cat-mechanical-items',
+    name: 'Mechanical Items',
+    description: 'Precision aircraft fasteners, hardware, O-rings, and mechanical spares.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Mechancial%20Items.jpg',
+    order: 10,
+  },
+  {
+    id: 'cat-mechanical-consumables',
+    name: 'Mechanical Consumables',
+    description: 'Safety wires, rivets, cotter pins, filter elements, and workshop consumables.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Mechancial%20Consumables.jpg',
+    order: 11,
+  },
+  {
+    id: 'cat-ndt-chemicals',
+    name: 'NDT Chemicals',
+    description: 'Fluorescent penetrants, developers, and magnetic particle non-destructive testing materials.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/NDT%20Chemicals.jpg',
+    order: 12,
+  },
+  {
+    id: 'cat-film-adhesives',
+    name: 'Film Adhesives',
+    description: 'Structural epoxy film adhesives for composite and metal-to-metal bonding.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Adhesives.jpg',
+    order: 13,
+  },
+  {
+    id: 'cat-conductive-adhesives',
+    name: 'Conductive Adhesives',
+    description: 'Electrically and thermally conductive adhesives for aerospace avionics.',
+    imageUrl: 'https://divyanshiaviation.com/assets/img/products/Adhesives.jpg',
+    order: 14,
+  },
+];
 
-export const INITIAL_PRODUCTS: Product[] = [];
+export const INITIAL_PRODUCTS: Product[] = (rawProducts as any[]).map((p, idx) => ({
+  id: p.id || `prod-${idx + 1}`,
+  name: p.name,
+  category: p.category,
+  description: p.description || `${p.name} for aviation & aerospace application`,
+  imageUrl: p.image || p.imageUrl || '',
+  createdAt: new Date(Date.now() - (idx % 100) * 3600000).toISOString(),
+}));
 
 export const INITIAL_CLIENTS: Client[] = [
   {
