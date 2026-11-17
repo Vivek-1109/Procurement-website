@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodError } from 'zod';
 import jwt from 'jsonwebtoken';
+import { sentinel } from '../lib/sentinel';
 
 // PostgreSQL error codes
 const PG_UNIQUE_VIOLATION = '23505';
@@ -33,6 +34,24 @@ const errorHandler = (
   } else {
     console.error(`[ERROR] ${req.method} ${req.path}: ${err.message}`);
   }
+
+  // Forward unhandled exception / error to SentinelAI
+  sentinel.log({
+    level: 'ERROR',
+    message: err.message || 'Unhandled server error',
+    exceptionType: err.name || (err.code ? `PostgresError_${err.code}` : 'Error'),
+    stackTrace: err.stack,
+    requestPath: req.originalUrl || req.path,
+    traceId: (req as Request & { traceId?: string }).traceId,
+    metadata: {
+      method: req.method,
+      statusCode: err.statusCode || 500,
+      code: err.code,
+      detail: err.detail,
+      constraint: err.constraint,
+      column: err.column,
+    },
+  });
 
   // ── PostgreSQL errors ──────────────────────────────────────
   if (err.code === PG_UNIQUE_VIOLATION) {

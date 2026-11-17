@@ -11,6 +11,7 @@ import fs from "fs";
 
 import connectDB from "./config/db";
 import errorHandler from "./middleware/errorHandler";
+import { sentinel, sentinelRequestMiddleware } from "./lib/sentinel";
 
 import authRoutes from "./routes/auth";
 import productRoutes from "./routes/products";
@@ -136,6 +137,9 @@ if (process.env.NODE_ENV === "production") {
   }));
 }
 
+// Attach SentinelAI non-blocking request telemetry middleware
+app.use(sentinelRequestMiddleware);
+
 
 // ──────────────────────────────────────────────
 // Rate limiting
@@ -182,6 +186,50 @@ app.use("/api", globalRateLimit);
 // ──────────────────────────────────────────────
 app.get("/api/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// ──────────────────────────────────────────────
+// SentinelAI Integration Verification Route
+// ──────────────────────────────────────────────
+app.get("/api/test-sentinel-log", async (req: Request, res: Response) => {
+  const traceId = (req as Request & { traceId?: string }).traceId;
+
+  // 1. Dispatch sample INFO log
+  sentinel.info("SentinelAI test INFO log from Divyanshi Aviation", {
+    requestPath: req.originalUrl || req.path,
+    traceId,
+    metadata: {
+      environment: process.env.NODE_ENV || "development",
+      service: process.env.SENTINEL_SERVICE_NAME,
+      testTimestamp: new Date().toISOString(),
+    },
+  });
+
+  // 2. Dispatch sample ERROR log with synthetic stack trace
+  const sampleError = new Error("SentinelAI test ERROR verification exception");
+  sentinel.captureException(sampleError, {
+    requestPath: req.originalUrl || req.path,
+    traceId,
+    metadata: {
+      simulated: true,
+      testType: "manual_verification",
+    },
+  });
+
+  // 3. Immediately flush to verify endpoint communication
+  const flushResult = await sentinel.flush();
+
+  res.json({
+    status: "ok",
+    message: "Test logs dispatched to SentinelAI",
+    traceId,
+    sentinelConfig: {
+      apiUrl: sentinel.getConfig().apiUrl,
+      serviceName: sentinel.getConfig().serviceName,
+      enabled: sentinel.getConfig().enabled,
+    },
+    sentinelResponse: flushResult,
+  });
 });
 
 // ──────────────────────────────────────────────
@@ -262,13 +310,29 @@ const startServer = async (): Promise<void> => {
 };
 
 // Handle unhandled rejections
-process.on("unhandledRejection", (reason, promise) => {
+process.on("unhandledRejection", async (reason, promise) => {
   console.error("Unhandled Rejection at:", promise, "reason:", reason);
+  const err = reason instanceof Error ? reason : new Error(String(reason));
+  sentinel.log({
+    level: "ERROR",
+    message: `Unhandled Rejection: ${err.message}`,
+    exceptionType: err.name || "UnhandledRejection",
+    stackTrace: err.stack,
+    metadata: { reason: String(reason) },
+  });
+  await sentinel.flush().catch(() => {});
   process.exit(1);
 });
 
-process.on("uncaughtException", (err) => {
+process.on("uncaughtException", async (err) => {
   console.error("Uncaught Exception:", err);
+  sentinel.log({
+    level: "FATAL",
+    message: `Uncaught Exception: ${err.message}`,
+    exceptionType: err.name || "UncaughtException",
+    stackTrace: err.stack,
+  });
+  await sentinel.flush().catch(() => {});
   process.exit(1);
 });
 
